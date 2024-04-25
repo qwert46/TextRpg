@@ -27,7 +27,7 @@ namespace TextRpg
             {
                 ShowMainMenu();
 
-                Console.Write("원하시는 행동을 입력해주세요: ");
+                Console.Write("\n원하시는 행동을 입력해주세요: ");
                 string input = Console.ReadLine();
 
                 if (input == "1")
@@ -55,33 +55,35 @@ namespace TextRpg
 
         static void ShowMainMenu()
         {
+            Console.Clear();
             Console.WriteLine("\n[메인 메뉴]");
-            Console.WriteLine("1. 상태 보기");
+            Console.WriteLine("\n1. 상태 보기");
             Console.WriteLine("2. 인벤토리");
             Console.WriteLine("3. 상점");
-            Console.WriteLine("4. 던전 들어가기(미구현)");
+            Console.WriteLine("4. 던전 들어가기");
         }
+
         static void Stage()
         {
             char[,] map = new char[20, 20]; // 20x20 크기의 맵 배열
-            
             InitializeMap(); // 맵 초기화
-            DisplayMap(); // 맵 출력
-            Console.WriteLine("1. 마을로 돌아가기(미구현)");
+            DisplayMap();    // 맵 출력
+            Console.WriteLine("\n1. 마을로 돌아가기");
             Console.ReadKey(true);
             string input = Console.ReadLine();
 
             if (input == "1")
             {
-                ShowMainMenu();
+                
             }
             else
             {
-                Console.WriteLine("잘못된 입력입니다.");
+                Stage();
             }
+           
             void InitializeMap()
             {
-                // 맵을 초기화합니다. 각 셀은 '.'으로 초기화합니다.
+                // 맵을 초기화. 각 셀을 '.'으로 초기화.
                 for (int row = 0; row < 20; row++)
                 {
                     for (int col = 0; col < 20; col++)
@@ -92,23 +94,23 @@ namespace TextRpg
                         }
                         else
                         {
-                            map[row, col] = '.'; // 내부는 '.'으로 초기화합니다.
+                            map[row, col] = ' '; // 내부는 ' '으로 초기화.
                         }
                     }
                 }
             }
             void DisplayMap()
             {
-                Console.Clear(); // 콘솔 화면을 지웁니다.
+                Console.Clear(); // 콘솔 화면을 지운다.
 
-                // 맵을 출력합니다.
+                // 맵을 출력한다.
                 for (int row = 0; row < 20; row++)
                 {
                     for (int col = 0; col < 20; col++)
                     {
                         Console.Write(map[row, col] + " ");
                     }
-                    Console.WriteLine(); // 한 행 출력 후 줄바꿈
+                    Console.WriteLine(); 
                 }
             }
         }
@@ -120,6 +122,7 @@ namespace TextRpg
 
     static void ShowStatus()
     {
+        Console.Clear();
         Console.WriteLine("\n[상태 보기]");
         Console.WriteLine($"Lv. {player.Level}");
         Console.WriteLine($"{player.Name} ( {player.Class} )");
@@ -134,7 +137,8 @@ namespace TextRpg
 
     static void ShowInventory()
     {
-        Console.WriteLine("\n[인벤토리]");
+            Console.Clear();
+            Console.WriteLine("\n[인벤토리]");
 
         for (int i = 0; i < inventory.Count; i++)
         {
@@ -148,6 +152,7 @@ namespace TextRpg
 
     static void ShowShop()
     {
+
         Console.WriteLine("\n[상점]");
         Console.WriteLine($"[보유 골드] {player.Gold} G\n");
 
